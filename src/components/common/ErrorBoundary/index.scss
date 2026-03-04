@@ -1,0 +1,306 @@
+/* 错误边界页面样式 - 严格父子嵌套结构 */
+.error-boundary-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
+  color: white;
+  padding: 20px;
+
+  .error-boundary-container {
+    width: 100%;
+    max-width: 500px;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 48px 32px;
+    box-shadow:
+      0 32px 80px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+      0 1px 0 rgba(255, 255, 255, 0.1) inset;
+    text-align: center;
+
+    /* 错误图标区域 */
+    .error-icon-wrapper {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 32px;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.2) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      box-shadow:
+        0 12px 32px rgba(239, 68, 68, 0.2),
+        0 0 0 1px rgba(239, 68, 68, 0.1) inset;
+      animation: pulse 2s ease-in-out infinite;
+
+      .error-icon {
+        width: 64px;
+        height: 64px;
+        color: #f87171;
+        stroke-width: 1.5;
+      }
+    }
+
+    /* 呼吸动画 */
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow:
+          0 12px 32px rgba(239, 68, 68, 0.2),
+          0 0 0 1px rgba(239, 68, 68, 0.1) inset;
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow:
+          0 16px 48px rgba(239, 68, 68, 0.3),
+          0 0 0 1px rgba(239, 68, 68, 0.15) inset;
+      }
+    }
+
+    .error-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #fca5a5 0%, #ef4444 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 0.02em;
+    }
+
+    .error-description {
+      font-size: 16px;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 32px;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* 按钮区域 */
+    .error-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+
+      .error-btn {
+        padding: 12px 28px;
+        border-radius: 14px;
+        font-size: 15px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        position: relative;
+        overflow: hidden;
+
+        .btn-icon {
+          width: 18px;
+          height: 18px;
+        }
+
+        &.primary-btn {
+          /* 蓝紫色金属渐变 */
+          background: linear-gradient(180deg, 
+            rgba(129, 140, 248, 0.95) 0%, 
+            rgba(99, 102, 241, 0.95) 50%, 
+            rgba(79, 70, 229, 0.98) 100%);
+          color: white;
+          border: 1px solid rgba(129, 140, 248, 0.5);
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.3),
+            inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+            0 4px 12px rgba(99, 102, 241, 0.3);
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+              transparent 0%, 
+              rgba(255, 255, 255, 0.25) 50%, 
+              transparent 100%);
+            transition: left 0.6s ease;
+          }
+
+          &:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(180deg, 
+              rgba(129, 140, 248, 1) 0%, 
+              rgba(99, 102, 241, 1) 50%, 
+              rgba(79, 70, 229, 1) 100%);
+            box-shadow:
+              inset 0 1px 0 rgba(255, 255, 255, 0.4),
+              inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+              0 8px 24px rgba(99, 102, 241, 0.5);
+          }
+
+          &:hover::before {
+            left: 100%;
+          }
+        }
+
+        &.secondary-btn {
+          /* 银灰色金属渐变 */
+          background: linear-gradient(180deg, 
+            rgba(148, 163, 184, 0.9) 0%, 
+            rgba(100, 116, 139, 0.9) 50%, 
+            rgba(71, 85, 105, 0.95) 100%);
+          color: #f8fafc;
+          border: 1px solid rgba(148, 163, 184, 0.4);
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.3),
+            inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+            0 2px 8px rgba(0, 0, 0, 0.3);
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+              transparent 0%, 
+              rgba(255, 255, 255, 0.2) 50%, 
+              transparent 100%);
+            transition: left 0.6s ease;
+          }
+
+          &:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(180deg, 
+              rgba(148, 163, 184, 0.95) 0%, 
+              rgba(100, 116, 139, 0.95) 50%, 
+              rgba(71, 85, 105, 1) 100%);
+            box-shadow:
+              inset 0 1px 0 rgba(255, 255, 255, 0.4),
+              inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+              0 6px 16px rgba(0, 0, 0, 0.4);
+          }
+
+          &:hover::before {
+            left: 100%;
+          }
+        }
+      }
+    }
+
+    /* 错误详情开关 */
+    .error-details-toggle {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 auto;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: #cbd5e1;
+      }
+
+      .toggle-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    /* 错误详情面板 */
+    .error-details-panel {
+      margin-top: 24px;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 16px;
+      border: 1px solid rgba(30, 41, 59, 0.8);
+      padding: 20px;
+      text-align: left;
+      box-shadow:
+        inset 0 2px 8px rgba(0, 0, 0, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+
+      .error-details-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+
+        .error-details-label {
+          font-size: 13px;
+          color: #64748b;
+          font-weight: 500;
+        }
+
+        .copy-btn {
+          background: transparent;
+          border: none;
+          color: #60a5fa;
+          font-size: 12px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 4px 8px;
+          border-radius: 6px;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: rgba(96, 165, 250, 0.1);
+            color: #93c5fd;
+          }
+
+          .copy-icon {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+
+      .error-details-content {
+        font-family: 'JetBrains Mono', 'Consolas', monospace;
+        font-size: 12px;
+        color: #fca5a5;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        word-break: break-all;
+        max-height: 280px;
+        overflow-y: auto;
+        padding-right: 8px;
+
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: rgba(30, 41, 59, 0.5);
+          border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: rgba(100, 116, 139, 0.6);
+          border-radius: 3px;
+
+          &:hover {
+            background: rgba(100, 116, 139, 0.8);
+          }
+        }
+      }
+    }
+  }
+}

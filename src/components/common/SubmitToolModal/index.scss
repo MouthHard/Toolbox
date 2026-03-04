@@ -1,0 +1,737 @@
+/* 提交工具弹窗 - 严格父子嵌套结构 */
+.submit-tool-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* 弹窗内容容器 - 使用flex布局 */
+    .modal-content {
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f151e 0%, #182546 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      animation: slideUp 0.3s ease;
+      display: flex;
+      flex-direction: column;
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 24px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        width: 100%;
+        box-sizing: border-box;
+
+      .modal-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #ffffff;
+        margin: 0;
+      }
+
+      .modal-close-btn {
+        background: transparent;
+        border: none;
+        color: #94a3b8;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(249, 187, 187, 0.1);
+          color: #fe5c5c;
+        }
+      }
+    }
+
+    .modal-body {
+        padding: 24px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        flex: 1;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+ 
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+ 
+      }
+
+ 
+      .form-group {
+        margin-bottom: 20px;
+
+ 
+        .form-label {
+          display: block;
+          font-size: 14px;
+          font-weight: 500;
+          color: #f4f8fe;
+          margin-bottom: 8px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+
+          .required {
+            color: #fd0101;
+            font-size: 12px;
+          }
+        }
+
+ 
+        .select-wrapper {
+          position: relative;
+          width: 100%;
+
+  
+          &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 2px solid rgba(30, 41, 59, 0.9);
+            border-radius: 12px;
+            box-shadow:
+              0 8px 24px rgba(0, 0, 0, 0.4),
+              0 4px 12px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            z-index: 9999;
+            max-height: 300px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+
+ 
+          &:hover::after {
+            opacity: 0;
+            visibility: hidden;
+          }
+
+          /* 选择框 */
+          .form-select {
+            width: 100%;
+            padding: 14px 18px;
+            padding-right: 48px;
+ 
+            background: linear-gradient(
+              180deg,
+              rgba(30, 41, 59, 0.8) 0%,
+              rgba(15, 23, 42, 0.9) 100%
+            );
+            border: 2px solid rgba(30, 41, 59, 0.9);
+            border-radius: 12px;
+            color: #f1f5f9;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            outline: none;
+            box-sizing: border-box;
+            backdrop-filter: blur(12px);
+            /* 内阴影增强凹陷感 */
+            box-shadow:
+              inset 0 3px 8px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1),
+              0 2px 8px rgba(0, 0, 0, 0.3);
+            appearance: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 10000;
+
+            &::placeholder {
+              color: #8292a9;
+              font-weight: 400;
+            }
+
+            /* 悬停效果 */
+            &:hover {
+              border-color: rgba(99, 102, 241, 0.4);
+              transform: translateY(-1px);
+              box-shadow:
+                inset 0 3px 8px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                0 4px 12px rgba(0, 0, 0, 0.35);
+              background: linear-gradient(
+                180deg,
+                rgba(30, 41, 59, 0.85) 0%,
+                rgba(15, 23, 42, 0.95) 100%
+              );
+            }
+
+            /* 聚焦效果 */
+            &:focus {
+              border-color: rgba(99, 102, 241, 0.8);
+              transform: translateY(-2px);
+              /* 聚焦时发光效果 */
+              box-shadow:
+                0 0 0 3px rgba(99, 102, 241, 0.25),
+                0 8px 20px rgba(99, 102, 241, 0.25),
+                inset 0 3px 8px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(96, 165, 250, 0.2);
+              background: linear-gradient(
+                180deg,
+                rgba(30, 41, 59, 0.9) 0%,
+                rgba(2, 6, 23, 0.98) 100%
+              );
+            }
+
+            /* 错误状态 */
+            &.error {
+              border-color: rgba(239, 68, 68, 0.6);
+              background: linear-gradient(
+                180deg,
+                rgba(239, 68, 68, 0.1) 0%,
+                rgba(220, 38, 38, 0.15) 100%
+              );
+
+              &:focus {
+                box-shadow:
+                  0 0 0 3px rgba(239, 68, 68, 0.25),
+                  0 8px 20px rgba(239, 68, 68, 0.25),
+                  inset 0 3px 8px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(239, 68, 68, 0.2);
+              }
+            }
+
+            /* 禁用状态 */
+            &:disabled {
+              opacity: 0.5;
+              cursor: not-allowed;
+              transform: none;
+
+              &:hover {
+                border-color: rgba(30, 41, 59, 0.9);
+                transform: none;
+                box-shadow:
+                  inset 0 3px 8px rgba(0, 0, 0, 0.4),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                  0 2px 8px rgba(0, 0, 0, 0.3);
+              }
+            }
+
+            /* 隐藏原生下拉箭头 */
+            &::-ms-expand {
+              display: none;
+            }
+
+            /* 下拉选项样式 */
+            option {
+              /* 背景渐变 */
+              background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+              /* 文字颜色 */
+              color: #f1f5f9;
+              /* 内边距 */
+              padding: 14px 18px;
+              /* 字体大小 */
+              font-size: 14px;
+              /* 字体权重 */
+              font-weight: 500;
+              /* 边框 */
+              border: none;
+              /* 边框圆角 */
+              border-radius: 8px;
+              /* 过渡效果 */
+              transition: all 0.2s ease;
+
+              /* 悬停效果 */
+              &:hover {
+                background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+                cursor: pointer;
+                transform: translateX(4px);
+              }
+
+              /* 选中效果 */
+              &:checked {
+                background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+                color: white;
+                box-shadow: 0 0 12px rgba(79, 70, 229, 0.4);
+              }
+
+              /* 禁用状态 */
+              &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+              }
+            }
+          }
+
+          /* 自定义下拉箭头图标 */
+          .select-arrow {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: #94a3b8;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 10001;
+          }
+
+    
+          .select-arrow.open {
+            transform: translateY(-50%) rotate(180deg);
+            color: #6366f1;
+          }
+
+          /* 悬停时箭头颜色变化 */
+          .form-select:hover .select-arrow {
+            color: #6366f1;
+          }
+
+          /* 聚焦时箭头颜色变化 */
+          .form-select:focus .select-arrow {
+            color: #818cf8;
+          }
+        }
+
+ 
+        .form-input,
+        .form-textarea {
+          width: 100%;
+          padding: 14px 18px;
+      
+          background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+          border: 2px solid rgba(30, 41, 59, 0.9);
+          border-radius: 12px;
+          color: #f1f5f9;
+          font-size: 14px;
+          font-weight: 500;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          outline: none;
+          box-sizing: border-box;
+          backdrop-filter: blur(12px);
+          /* 内阴影增强凹陷感 */
+          box-shadow:
+            inset 0 3px 8px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            0 2px 8px rgba(0, 0, 0, 0.3);
+
+          &::placeholder {
+            color: #8292a9;
+            font-weight: 400;
+          }
+
+          /* 悬停效果 */
+          &:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+ 
+            box-shadow:
+              inset 0 3px 8px rgba(0, 0, 0, 0.35),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12),
+              0 4px 12px rgba(0, 0, 0, 0.35);
+            background: linear-gradient(
+              180deg,
+              rgba(30, 41, 59, 0.85) 0%,
+              rgba(15, 23, 42, 0.95) 100%
+            );
+          }
+
+          /* 聚焦效果 */
+          &:focus {
+            border-color: rgba(99, 102, 241, 0.8);
+ 
+            /* 聚焦时发光效果 */
+            box-shadow:
+              0 0 0 3px rgba(99, 102, 241, 0.25),
+              0 8px 20px rgba(99, 102, 241, 0.25),
+              inset 0 3px 8px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(96, 165, 250, 0.2);
+            background: linear-gradient(
+              180deg,
+              rgba(30, 41, 59, 0.9) 0%,
+              rgba(2, 6, 23, 0.98) 100%
+            );
+          }
+
+          /* 错误状态 */
+          &.error {
+            border-color: rgba(239, 68, 68, 0.6);
+            background: linear-gradient(
+              180deg,
+              rgba(239, 68, 68, 0.1) 0%,
+              rgba(220, 38, 38, 0.15) 100%
+            );
+
+            &:focus {
+              box-shadow:
+                0 0 0 3px rgba(239, 68, 68, 0.25),
+                0 8px 20px rgba(239, 68, 68, 0.25),
+                inset 0 3px 8px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(239, 68, 68, 0.2);
+            }
+          }
+        }
+
+ 
+        .form-textarea {
+          resize: vertical;
+          min-height: 100px;
+          font-family: inherit;
+          line-height: 1.5;
+        }
+
+    
+        .form-error {
+          display: block;
+          margin-top: 8px;
+          font-size: 12px;
+          color: #f87171;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 10px;
+          background: rgba(239, 68, 68, 0.1);
+          border: 1px solid rgba(239, 68, 68, 0.2);
+          border-radius: 6px;
+
+          &::before {
+            content: '⚠️';
+            font-size: 11px;
+          }
+        }
+
+ 
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #8292a9;
+            margin-top: 6px;
+            font-weight: 500;
+          }
+        }
+      }
+
+      /* 底部按钮组 */
+      .form-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+        padding: 20px 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+        box-sizing: border-box;
+
+        .modal-btn {
+          padding: 12px 32px;
+          border-radius: 14px;
+          font-size: 15px;
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          position: relative;
+          overflow: hidden;
+          min-width: 100px;
+          justify-content: center;
+
+          /* 扫光动画 */
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+              90deg,
+              transparent 0%,
+              rgba(255, 255, 255, 0.2) 50%,
+              transparent 100%
+            );
+            transition: left 0.6s ease;
+          }
+
+          &:hover::before {
+            left: 100%;
+          }
+
+          /* 取消按钮 - 银灰色金属渐变 */
+          &.cancel-btn {
+            background: linear-gradient(
+              180deg,
+              rgba(148, 163, 184, 0.9) 0%,
+              rgba(100, 116, 139, 0.9) 50%,
+              rgba(71, 85, 105, 0.95) 100%
+            );
+            color: #f8fafc;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            box-shadow:
+              inset 0 1px 0 rgba(255, 255, 255, 0.3),
+              inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+              0 2px 8px rgba(0, 0, 0, 0.3);
+
+            &:hover {
+              transform: translateY(-2px);
+              background: linear-gradient(
+                180deg,
+                rgba(148, 163, 184, 0.95) 0%,
+                rgba(100, 116, 139, 0.95) 50%,
+                rgba(71, 85, 105, 1) 100%
+              );
+              box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+                0 6px 16px rgba(0, 0, 0, 0.4);
+            }
+          }
+
+          /* 确认按钮 - 绿色金属渐变 */
+          &.confirm-btn {
+            background: linear-gradient(
+              180deg,
+              rgba(34, 197, 94, 0.95) 0%,
+              rgba(16, 185, 129, 0.95) 50%,
+              rgba(5, 150, 105, 0.98) 100%
+            );
+            color: white;
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            box-shadow:
+              inset 0 1px 0 rgba(255, 255, 255, 0.3),
+              inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+              0 4px 12px rgba(16, 185, 129, 0.3);
+
+            &:hover {
+              transform: translateY(-2px);
+              background: linear-gradient(
+                180deg,
+                rgba(34, 197, 94, 1) 0%,
+                rgba(16, 185, 129, 1) 50%,
+                rgba(5, 150, 105, 1) 100%
+              );
+              box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+                0 8px 24px rgba(16, 185, 129, 0.45);
+              }
+            }
+          }
+        }
+  }
+
+  .custom-dropdown {
+    position: relative;
+
+    .form-select {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 14px 18px;
+      margin-bottom: 8px;
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border: 2px solid rgba(30, 41, 59, 0.9);
+      box-shadow:
+        inset 0 3px 8px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.3);
+
+      &.disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      &:hover:not(.disabled) {
+        border-color: rgba(99, 102, 241, 0.4);
+        transform: translateY(-1px);
+        box-shadow:
+          inset 0 3px 8px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12),
+          0 4px 12px rgba(0, 0, 0, 0.35);
+        background: linear-gradient(180deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      }
+
+      span {
+        flex: 1;
+        text-align: left;
+        padding-right: 12px;
+        color: #f1f5f9;
+        font-weight: 500;
+      }
+    }
+
+    .dropdown-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: 0;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 2px solid rgba(30, 41, 59, 0.9);
+      border-radius: 12px;
+      box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(99, 102, 241, 0.1);
+      backdrop-filter: blur(12px);
+      z-index: 99999;
+      max-height: 300px;
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px) scale(0.95);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      /* 添加淡入淡出和缩放动画 */
+      animation: dropdownFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      @keyframes dropdownFadeIn {
+        from {
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-8px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes dropdownFadeOut {
+        from {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0) scale(1);
+        }
+        to {
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-8px) scale(0.95);
+        }
+      }
+
+      /* 隐藏下拉菜单滚动条 */
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    /* 下拉菜单展开状态 */
+    &:has(.dropdown-options) .dropdown-options {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .dropdown-option {
+      padding: 14px 18px;
+      color: #f1f5f9;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      overflow: hidden;
+
+      /* 选项悬停时的发光效果 */
+      &:hover {
+        background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+        transform: translateX(4px);
+        box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.3);
+      }
+
+      /* 选项选中效果 */
+      &.selected {
+        background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+        color: white;
+        box-shadow:
+          inset 0 0 0 1px rgba(79, 70, 229, 0.6),
+          0 0 12px rgba(79, 70, 229, 0.4);
+      }
+
+      /* 选项禁用状态 */
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* 选项边框圆角 */
+      &:last-child {
+        border-bottom: none;
+        border-radius: 0 0 12px 12px;
+      }
+
+      &:first-child {
+        border-radius: 12px 12px 0 0;
+      }
+
+      /* 选项悬停时的渐变光效 */
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 100%
+        );
+        transition: left 0.6s ease;
+      }
+
+      &:hover::before {
+        left: 100%;
+      }
+    }
+  }
+}

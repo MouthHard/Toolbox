@@ -1,0 +1,264 @@
+/* 我的页面 */
+.my-page {
+  width: calc(100% + 4rem);
+  margin: -2rem 0 0 -2rem;
+  padding: 0;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+
+  // 左侧侧边栏
+  .my-page-sidebar {
+    width: 280px;
+    padding: 2rem 1rem 2rem 2rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    overflow-y: auto;
+
+    .sidebar-section {
+      margin-bottom: 2rem;
+
+      .sidebar-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .folder-count {
+          font-size: 0.8rem;
+          color: #64748b;
+          background: rgba(255, 255, 255, 0.05);
+          padding: 0.2rem 0.5rem;
+          border-radius: 12px;
+          font-weight: 400;
+        }
+      }
+
+      .tab-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .tab-item {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 0.75rem 1rem;
+          border-radius: 10px;
+          border: none;
+          background: transparent;
+          color: #94a3b8;
+          font-size: 0.95rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          width: 100%;
+          text-align: left;
+
+          svg {
+            flex-shrink: 0;
+          }
+
+          .tab-count {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: #64748b;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+          }
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: #e2e8f0;
+
+            .tab-count {
+              color: #94a3b8;
+              background: rgba(255, 255, 255, 0.08);
+            }
+          }
+
+          &.active {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.1));
+            color: #c7d2fe;
+
+            .tab-count {
+              background: rgba(99, 102, 241, 0.2);
+              color: #c7d2fe;
+            }
+          }
+        }
+      }
+
+      .folder-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .folder-item {
+          display: flex;
+          align-items: center;
+          padding: 0.75rem 1rem;
+          border-radius: 10px;
+          background: transparent;
+          color: #94a3b8;
+          font-size: 0.95rem;
+          font-weight: 500;
+          transition: all 0.2s ease;
+
+          .folder-item-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+
+            svg {
+              flex-shrink: 0;
+              color: #f59e0b;
+            }
+
+            .folder-count {
+              margin-left: auto;
+              font-size: 0.8rem;
+              color: #64748b;
+              background: rgba(255, 255, 255, 0.05);
+              padding: 0.2rem 0.5rem;
+              border-radius: 12px;
+            }
+          }
+
+          .folder-delete-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border: none;
+            border-radius: 6px;
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: 0.5rem;
+
+            &:hover:not(:disabled) {
+              background: rgba(239, 68, 68, 0.2);
+              color: #f87171;
+            }
+
+            &:disabled {
+              opacity: 0.5;
+              cursor: not-allowed;
+            }
+          }
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.04);
+
+            .folder-item-content {
+              color: #e2e8f0;
+            }
+          }
+
+          &.active {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(249, 115, 22, 0.1));
+
+            .folder-item-content {
+              color: #fed7aa;
+
+              .folder-count {
+                background: rgba(245, 158, 11, 0.2);
+                color: #fdba74;
+              }
+            }
+          }
+        }
+
+        .add-folder-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 0.75rem 1rem;
+          border-radius: 10px;
+          border: 1px dashed rgba(255, 255, 255, 0.15);
+          background: transparent;
+          color: #64748b;
+          font-size: 0.9rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          width: 100%;
+          margin-top: 0.5rem;
+
+          svg {
+            flex-shrink: 0;
+          }
+
+          &:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            color: #a5b4fc;
+            background: rgba(99, 102, 241, 0.1);
+          }
+        }
+      }
+    }
+  }
+
+  // 右侧内容区
+  .my-page-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+
+    .content-header {
+      margin-bottom: 2rem;
+
+      .content-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #f9fafb;
+        margin-bottom: 0.25rem;
+      }
+
+      .content-subtitle {
+        font-size: 0.9rem;
+        color: #94a3b8;
+      }
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+
+      .empty-state-icon {
+        width: 4rem;
+        height: 4rem;
+        color: #9ca3af;
+        margin-bottom: 1rem;
+      }
+
+      .empty-state-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #f9fafb;
+        margin-bottom: 0.5rem;
+      }
+
+      .empty-state-description {
+        color: #9ca3af;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

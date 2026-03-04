@@ -1,0 +1,355 @@
+$transition-fast: 0.25s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-card: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+$color-primary: #3b82f6;
+$color-primary-light: #60a5fa;
+$color-purple: #8b5cf6;
+$color-purple-light: #a78bfa;
+$color-amber: #f59e0b;
+$color-amber-light: #fbbf24;
+$color-red: #ef4444;
+
+.shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    rgba(30, 41, 59, 0.8) 25%,
+    rgba(51, 65, 85, 0.8) 50%,
+    rgba(30, 41, 59, 0.8) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-line {
+  background: linear-gradient(
+    90deg,
+    rgba(51, 65, 85, 0.7) 25%,
+    rgba(71, 85, 105, 0.7) 50%,
+    rgba(51, 65, 85, 0.7) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+.skeleton-tag {
+  background: linear-gradient(
+    90deg,
+    rgba(51, 65, 85, 0.5) 25%,
+    rgba(71, 85, 105, 0.5) 50%,
+    rgba(51, 65, 85, 0.5) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 999px;
+}
+
+.tool-card-link {
+  text-decoration: none;
+  color: inherit;
+
+  .tool-card {
+    border-radius: 24px;
+    padding: 1.5rem;
+    transition: all $transition-card;
+    display: flex;
+    flex-direction: column;
+    background: rgba(30, 41, 59, 0.9);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    .top-copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba($color-purple, 0.15);
+      border: 2px solid rgba($color-purple, 0.8);
+      color: #c4b5fd;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all $transition-normal;
+      z-index: 999;
+
+      &:hover {
+        background: rgba($color-purple, 0.3);
+        border-color: $color-purple-light;
+        color: #ddd6fe;
+        transform: scale(1.1);
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+        stroke: #c4b5fd;
+        stroke-width: 2.5px;
+      }
+    }
+
+    .tool-card-top-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 33%, $color-amber 66%, $color-amber-light 100%);
+      transform: scaleX(0);
+      transition: transform $transition-slow;
+      transform-origin: left;
+    }
+
+    .tool-top-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tool-icon-wrapper {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+      transition: all $transition-slow;
+      position: relative;
+      overflow: hidden;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      .custom-svg-icon {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg,
+        img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: contain;
+        }
+      }
+    }
+
+    .tool-info-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .tool-card-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #f9fafb;
+        margin: 0;
+      }
+
+      .tool-quick-stats {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .quick-stat {
+          display: flex;
+          align-items: center;
+          gap: 0.3rem;
+          font-size: 0.8rem;
+          color: #94a3b8;
+          font-weight: 500;
+
+          svg { color: #a5b4fc; }
+        }
+      }
+    }
+
+    &:hover {
+      border-color: rgba($color-primary, 0.6);
+      transform: translateY(-10px) scale(1.03);
+
+      .tool-card-top-gradient { transform: scaleX(1); }
+
+      .tool-icon-wrapper {
+        transform: rotate(8deg) scale(1.15);
+        box-shadow: 0 15px 35px rgba($color-primary, 0.6);
+      }
+
+      .visit-button {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba($color-primary, 0.5);
+        filter: brightness(1.15);
+      }
+    }
+  }
+
+  .tool-card-description {
+    color: #d1d5db;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+  }
+
+  .tool-details-panel {
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.4rem 0.6rem;
+      border-radius: 8px;
+      transition: all $transition-fast;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      padding-right: 12px;
+      margin-right: 12px;
+
+      &:nth-child(2n) {
+        border-right: none;
+        padding-right: 0.6rem;
+        margin-right: 0;
+      }
+
+      &:hover { background: rgba(255, 255, 255, 0.03); }
+
+      .detail-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 500;
+
+        svg { width: 14px; height: 14px; }
+      }
+
+      .detail-value {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 600;
+      }
+
+      &:nth-child(1) .detail-label svg { color: #a5b4fc; }
+      &:nth-child(2) .detail-label svg { color: $color-amber; }
+      &:nth-child(3) .detail-label svg { color: $color-purple; }
+      &:nth-child(4) .detail-label svg { color: #ec4899; }
+    }
+  }
+
+  .tool-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
+
+    .footer-action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .footer-action-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(31, 41, 55, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all $transition-fast;
+        color: #9ca3af;
+        backdrop-filter: blur(10px);
+
+        &:hover {
+          background-color: #374151;
+          transform: scale(1.08);
+          border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        &.favorite-btn.active {
+          color: $color-amber;
+          background-color: rgba($color-amber, 0.15);
+          border-color: rgba($color-amber, 0.3);
+        }
+
+        &.like-btn.active {
+          color: $color-red;
+          background-color: rgba($color-red, 0.15);
+          border-color: rgba($color-red, 0.3);
+        }
+
+        &.share-btn:hover {
+          color: $color-primary;
+          background-color: rgba($color-primary, 0.15);
+          border-color: rgba($color-primary, 0.3);
+        }
+      }
+    }
+
+    .visit-button {
+      flex: 1;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6366f1 0%, $color-purple 100%);
+      color: white;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all $transition-fast;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+        transition: left 0.6s;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+        border-color: rgba(99, 102, 241, 0.6);
+
+        &::before { left: 100%; }
+      }
+
+      &:active { transform: translateY(0); }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+// 响应式断点
+$breakpoint-xs: 360px;  // 手机竖屏
+$breakpoint-sm: 480px;  // 手机横屏
+$breakpoint-md: 768px;  // 平板
+$breakpoint-lg: 1024px; // 小屏桌面
+$breakpoint-xl: 1280px; // 大屏桌面
+$breakpoint-xxl: 1536px; // 超大屏
+
+// 响应式媒体查询
+@mixin xs {
+  @media (max-width: $breakpoint-xs) { @content; }
+}
+
+@mixin sm {
+  @media (max-width: $breakpoint-sm) { @content; }
+}
+
+@mixin md {
+  @media (max-width: $breakpoint-md) { @content; }
+}
+
+@mixin lg {
+  @media (max-width: $breakpoint-lg) { @content; }
+}
+
+@mixin xl {
+  @media (max-width: $breakpoint-xl) { @content; }
+}
+
+@mixin xxl {
+  @media (max-width: $breakpoint-xxl) { @content; }
+}
+
+// 移动端安全区域适配
+@mixin safe-area-inset-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+@mixin safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+// 通用间距
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;

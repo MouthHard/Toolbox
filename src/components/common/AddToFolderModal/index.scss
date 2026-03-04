@@ -1,0 +1,173 @@
+ 
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+// 收藏夹弹窗背后的遮罩层
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  // 收藏夹弹窗
+  .modal-content {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 20px 60px rgb(0, 0, 0);
+    animation: modalFadeIn 0.2s ease;
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+      .modal-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #ffffff;
+     
+      }
+
+      .modal-close-btn {
+        background: transparent;
+        border: none;
+        color: #94a3b8;
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: #e2e8f0;
+        }
+      }
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+
+      .modal-description {
+        color: #b9c4d4;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+
+        .tool-name {
+          color: #eefb78;
+          font-weight: bold;
+        }
+      }
+
+      .folder-options {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .folder-option {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 0.9rem 1rem;
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+          }
+
+          &.active {
+            background: linear-gradient(135deg, rgba(100, 103, 246, 0.2), rgba(39, 5, 117, 0.4));
+            border-color: rgba(99, 102, 241, 0.5);
+          }
+
+          .folder-icon {
+            flex-shrink: 0;
+
+            &.favorite-icon {
+              color: #fbbf24;
+            }
+
+            &.folder-color {
+              color: #f59e0b;
+            }
+          }
+
+          .favorited-tag {
+            margin-left: auto;
+            font-size: 0.8rem;
+            padding:  6px;
+            border-radius: 3px;
+            background: rgb(3, 88, 60);
+            color: #f8f9f9;
+            border: 1px solid rgba(16, 185, 129, 1);
+            white-space: nowrap;
+            flex-shrink: 0;
+          }
+        }
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1rem;
+      padding: 1rem ;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+      .modal-btn {
+        padding: 0.5rem 1.3rem;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: none;
+      }
+
+      .cancel-btn {
+        background: rgb(146, 2, 2);
+        color: #ffffff;
+        &:hover {
+          background: rgba(255, 0, 0, 1);
+          box-shadow: 0 0 4px rgba(239, 68, 68, 1);
+        }
+      }
+
+      .confirm-btn {
+        background: linear-gradient(135deg, #166fa6, #1f05a0);
+        color: white;
+
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 0px 4px rgb(255, 255, 255);
+        }
+      }
+    }
+  }
+}
